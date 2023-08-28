@@ -1,12 +1,17 @@
 {
   "name": "dummy-esbuild",
   "type": "module",
-  "version": "0.0.3",
-  "main": "index.js",
+  "version": "0.1.0",
+  "main": "dist/index.js",
   "license": "MIT",
+  "scripts": {
+    "build": "yarn build:tsc",
+    "build:tsc": "yarn tsc"
+  },
   "exports": {
     ".": {
-      "import": "./index.js",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
       "require": "./index.cjs"
     }
   },
