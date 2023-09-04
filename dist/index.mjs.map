@@ -1,0 +1,1 @@
+{"version":3,"file":"index.mjs","sources":["../src/index.ts"],"sourcesContent":["export default function hello() {\n  return \"hello\";\n}\n"],"names":["hello"],"mappings":"AAAe,SAASA,IACtB,MAAO,OACT"}

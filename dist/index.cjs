@@ -1,2 +1,0 @@
-"use strict";var n=Object.defineProperty;var f=Object.getOwnPropertyDescriptor;var h=Object.getOwnPropertyNames;var a=Object.prototype.hasOwnProperty;var c=(l,e)=>{for(var t in e)n(l,t,{get:e[t],enumerable:!0})},d=(l,e,t,r)=>{if(e&&typeof e=="object"||typeof e=="function")for(let o of h(e))!a.call(l,o)&&o!==t&&n(l,o,{get:()=>e[o],enumerable:!(r=f(e,o))||r.enumerable});return l};var i=l=>d(n({},"__esModule",{value:!0}),l);var p={};c(p,{default:()=>u});module.exports=i(p);function u(){return"hello"}
-//# sourceMappingURL=index.cjs.map
