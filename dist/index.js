@@ -1,20 +1,2 @@
-// src/index.ts
-function add(a, b) {
-  return a + b;
-}
-function subtract(a, b) {
-  return a - b;
-}
-function multiply(a, b) {
-  return a * b;
-}
-function divide(a, b) {
-  return a / b;
-}
-export {
-  add,
-  divide,
-  multiply,
-  subtract
-};
+function e(){return"hello"}export{e as default};
 //# sourceMappingURL=index.js.map
