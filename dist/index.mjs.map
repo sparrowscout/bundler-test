@@ -2,6 +2,6 @@
   "version": 3,
   "sources": ["../src/index.ts"],
   "sourcesContent": ["function add(a: number, b: number) {\n  return a + b;\n}\nfunction subtract(a: number, b: number) {\n  return a - b;\n}\nfunction multiply(a: number, b: number) {\n  return a * b;\n}\nfunction divide(a: number, b: number) {\n  return a / b;\n}\nexport { add, subtract, multiply, divide };\n"],
-  "mappings": "mBAAA,SAASA,EAAIC,EAAWC,EAAW,CACjC,OAAOD,EAAIC,CACb,CACA,SAASC,EAASF,EAAWC,EAAW,CACtC,OAAOD,EAAIC,CACb,CACA,SAASE,EAASH,EAAWC,EAAW,CACtC,OAAOD,EAAIC,CACb,CACA,SAASG,EAAOJ,EAAWC,EAAW,CACpC,OAAOD,EAAIC,CACb",
+  "mappings": "AAAA,SAASA,EAAIC,EAAWC,EAAW,CACjC,OAAOD,EAAIC,CACb,CACA,SAASC,EAASF,EAAWC,EAAW,CACtC,OAAOD,EAAIC,CACb,CACA,SAASE,EAASH,EAAWC,EAAW,CACtC,OAAOD,EAAIC,CACb,CACA,SAASG,EAAOJ,EAAWC,EAAW,CACpC,OAAOD,EAAIC,CACb",
   "names": ["add", "a", "b", "subtract", "multiply", "divide"]
 }

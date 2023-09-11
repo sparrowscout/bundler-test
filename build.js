@@ -1,26 +1,76 @@
 // build.js
 import esbuild from "esbuild";
+import babel from "esbuild-plugin-babel";
 
 const onStartPlugin = {
-  name: "start",
+  name: "onStart",
   setup(build) {
     build.onStart(() => {
-      const startDate = new Date();
-      console.log(`build started ${startDate}`);
+      const date = new Date();
+      const s = date.getSeconds();
+      const ms = date.getMilliseconds();
+      console.log("start", s, ms);
     });
   },
 };
 
 const onEndPlugin = {
-  name: "end",
+  name: "onEnd",
   setup(build) {
-    build.onEnd((result) => {
-      const endDate = new Date();
-      console.log(`build ended with ${result.errors.length} errors`);
-      console.log(`build ended ${endDate}`);
+    build.onEnd(() => {
+      const date = new Date();
+      const s = date.getSeconds();
+      const ms = date.getMilliseconds();
+      console.log("end", s, ms);
     });
   },
 };
+
+const babelTsWithPresetEnvTargets = ({ targets }) => {
+  babel({
+    extensions,
+    babelHelpers: "bundled",
+    exclude: "node_modules/**",
+    assumptions: {
+      noDocumentAll: true,
+      noClassCalls: true,
+    },
+    presets: [
+      [
+        "@babel/preset-typescript",
+        {
+          optimizeConstEnums: true,
+        },
+      ],
+      [
+        "@babel/preset-env",
+        {
+          loose: true,
+          targets,
+          bugfixes: true,
+        },
+      ],
+    ],
+  });
+};
+
+const buildBabelLegacyBrowsers = () =>
+  babelTsWithPresetEnvTargets({ targets: babelPresetEnvTargets });
+
+const buildBabelEsm = () =>
+  babelTsWithPresetEnvTargets({ targets: { esmodules: true } });
+
+const babelPresetEnvTargets = {
+  chrome: "47",
+  firefox: "51",
+  safari: "8",
+  ios: "8",
+  android: "4",
+  samsung: "5",
+  edge: "14",
+};
+
+const extensions = [".ts", ".js"];
 
 // 공통으로 사용할 옵션들
 // https://esbuild.github.io/api/#build 에서 다양한 옵션들을 확인할 수 있다.
@@ -30,47 +80,26 @@ const baseConfig = {
   bundle: true, // 번들링 여부
   sourcemap: true, // 소스맵 생성 여부
   minify: true,
-  mangleQuoted: true,
-  minifySyntax: true,
-  treeShaking: true,
   plugins: [onStartPlugin, onEndPlugin],
 };
+
 Promise.all([
-  // 한 번은 cjs
+  // 한 번은 iife
   esbuild.build({
     ...baseConfig,
-    format: "cjs",
-    outExtension: {
-      ".js": ".cjs",
-    },
+    format: "iife",
+    plugins: [buildBabelLegacyBrowsers()],
   }),
-
   // 한 번은 esm
   esbuild.build({
     ...baseConfig,
     format: "esm",
+    outExtension: {
+      ".js": ".mjs",
+    },
+    plugins: [buildBabelEsm()],
   }),
 ]).catch(() => {
   console.log("Build failed");
   process.exit(1);
 });
-
-let envPlugin = {
-  name: "env",
-  setup(build) {
-    // Intercept import paths called "env" so esbuild doesn't attempt
-    // to map them to a file system location. Tag them with the "env-ns"
-    // namespace to reserve them for this plugin.
-    build.onResolve({ filter: /^env$/ }, (args) => ({
-      path: args.path,
-      namespace: "env-ns",
-    }));
-
-    // Load paths tagged with the "env-ns" namespace and behave as if
-    // they point to a JSON file containing the environment variables.
-    build.onLoad({ filter: /.*/, namespace: "env-ns" }, () => ({
-      contents: JSON.stringify(process.env),
-      loader: "json",
-    }));
-  },
-};
