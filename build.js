@@ -1,5 +1,30 @@
 // build.js
 import esbuild from "esbuild";
+
+const onStartPlugin = {
+  name: "onStart",
+  setup(build) {
+    build.onStart(() => {
+      const date = new Date();
+      const s = date.getSeconds();
+      const ms = date.getMilliseconds();
+      console.log("start", s, ms);
+    });
+  },
+};
+
+const onEndPlugin = {
+  name: "onEnd",
+  setup(build) {
+    build.onEnd(() => {
+      const date = new Date();
+      const s = date.getSeconds();
+      const ms = date.getMilliseconds();
+      console.log("end", s, ms);
+    });
+  },
+};
+
 // 공통으로 사용할 옵션들
 // https://esbuild.github.io/api/#build 에서 다양한 옵션들을 확인할 수 있다.
 const baseConfig = {
@@ -7,20 +32,23 @@ const baseConfig = {
   outdir: "dist", // 컴파일된 파일이 저장될 경로
   bundle: true, // 번들링 여부
   sourcemap: true, // 소스맵 생성 여부
+  minify: true,
+  plugins: [onStartPlugin, onEndPlugin],
 };
+
 Promise.all([
-  // 한 번은 cjs
+  // 한 번은 iife
   esbuild.build({
     ...baseConfig,
-    format: "cjs",
-    outExtension: {
-      ".js": ".cjs",
-    },
+    format: "iife",
   }),
   // 한 번은 esm
   esbuild.build({
     ...baseConfig,
     format: "esm",
+    outExtension: {
+      ".js": ".mjs",
+    },
   }),
 ]).catch(() => {
   console.log("Build failed");

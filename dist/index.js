@@ -1,20 +1,2 @@
-// src/index.ts
-function add(a, b) {
-  return a + b;
-}
-function subtract(a, b) {
-  return a - b;
-}
-function multiply(a, b) {
-  return a * b;
-}
-function divide(a, b) {
-  return a / b;
-}
-export {
-  add,
-  divide,
-  multiply,
-  subtract
-};
+"use strict";(()=>{function u(n,r){return n+r}function e(n,r){return n-r}function t(n,r){return n*r}function b(n,r){return n/r}})();
 //# sourceMappingURL=index.js.map
