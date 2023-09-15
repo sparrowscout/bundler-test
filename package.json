@@ -5,9 +5,9 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "prepack": "yarn build",
-    "build": "yarn clean && yarn build:tsc && yarn build:js",
-    "build:tsc": "yarn tsc --emitDeclarationOnly",
+    "prepack": "npm run build",
+    "build": "npm run clean && npm run build:tsc && npm run build:js",
+    "build:tsc": "npm run tsc --emitDeclarationOnly",
     "build:js": "node build.js",
     "clean": "rm -rf dist"
   },
