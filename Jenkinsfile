@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Build') {
             when {
-                branch "esbuild-*"
+                branch "esbuild*"
             }
             steps {
                sh 'npm install'
