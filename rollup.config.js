@@ -1,6 +1,6 @@
-import babel from "@rollup/plugin-babel";
-import commonjs from "@rollup/plugin-commonjs";
+import typescript from "@rollup/plugin-typescript";
 import terser from "@rollup/plugin-terser";
+
 const FORMAT = {
   umd: "umd",
   esm: "esm",
@@ -9,8 +9,8 @@ const FORMAT = {
 };
 
 const inputSrc = [
+  ["./src/index.ts", FORMAT.iife],
   ["./src/index.ts", FORMAT.esm],
-  ["./src/index.ts", FORMAT.cjs],
 ];
 
 export default inputSrc.map(([input, format]) => {
@@ -24,13 +24,6 @@ export default inputSrc.map(([input, format]) => {
       sourcemap: true,
     },
 
-    plugins: [
-      babel({
-        babelHelpers: "bundled",
-        exclude: "node_modules/**",
-      }),
-      commonjs({}),
-      terser(),
-    ],
+    plugins: [typescript(), terser()],
   };
 });
