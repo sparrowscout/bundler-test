@@ -1,5 +1,4 @@
 import path from "path";
-import TerserPlugin from "terser-webpack-plugin";
 import { fileURLToPath } from "url";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
@@ -7,7 +6,7 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 let config = [];
 
 const moduleArray = [
-  { name: "umd", format: ".js" },
+  { name: "iife", format: ".js" },
   { name: "module", format: ".mjs" },
 ];
 
@@ -16,10 +15,6 @@ function generateConfig(module) {
     mode: "production",
     entry: "./src/index.ts",
     devtool: "inline-source-map",
-    optimization: {
-      minimize: true,
-      minimizer: [new TerserPlugin()],
-    },
     module: {
       rules: [
         {
@@ -30,16 +25,17 @@ function generateConfig(module) {
       ],
     },
     experiments: {
-      outputModule: module.name === "module" ? true : false,
+      outputModule: true,
     },
     resolve: {
       extensions: [".tsx", ".ts", ".js"],
     },
     output: {
+      iife: module.name === "iife" ? true : false,
       filename: "index" + module.format,
       path: path.resolve(__dirname, "dist"),
       library: {
-        type: module.name,
+        type: "module",
       },
       clean: true,
     },

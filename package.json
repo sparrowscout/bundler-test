@@ -5,11 +5,8 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "prepack": "webpack",
-    "build": "yarn clean && yarn build:tsc",
-    "build:tsc": "yarn tsc",
-    "bundle:development": "webpack --mode=development",
-    "bundle:production": "webpack --mode=production",
+    "prepack": "npm run build",
+    "build": "npm run clean && tsc --emitDeclarationOnly && webpack --mode=production",
     "clean": "rm -rf dist"
   },
   "exports": {
