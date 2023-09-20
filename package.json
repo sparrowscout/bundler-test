@@ -5,10 +5,8 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "prepack": "yarn build",
-    "build": "yarn clean && yarn build:tsc && yarn build:js",
-    "build:tsc": "yarn tsc --emitDeclarationOnly",
-    "build:js": "rollup -c",
+    "prepack": "npm run build",
+    "build": "npm run clean && tsc --emitDeclarationOnly && rollup -c",
     "clean": "rm -rf dist"
   },
   "exports": {
