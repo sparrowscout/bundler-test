@@ -1,2 +1,13 @@
-!function(){"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.divide=exports.multiply=exports.subtract=exports.add=void 0,exports.add=function(t,e){return t+e},exports.subtract=function(t,e){return t-e},exports.multiply=function(t,e){return t*e},exports.divide=function(t,e){return t/e}}();
-//# sourceMappingURL=index.js.map
+function n(n, r) {
+  return n + r;
+}
+function r(n, r) {
+  return n - r;
+}
+function t(n, r) {
+  return n * r;
+}
+function u(n, r) {
+  return n / r;
+}
+export { n as add, u as divide, t as multiply, r as subtract };

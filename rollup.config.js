@@ -9,19 +9,19 @@ const FORMAT = {
 };
 
 const inputSrc = [
-  ["./src/index.ts", FORMAT.iife],
+  ["./src/index.ts", FORMAT.umd],
   ["./src/index.ts", FORMAT.esm],
 ];
 
 export default inputSrc.map(([input, format]) => {
-  const extension = format === FORMAT.esm ? "mjs" : "js";
+  const extension = format === FORMAT.umd ? "cjs" : "js";
 
   return {
     input,
     output: {
       file: `dist/index.${extension}`,
       format,
-      sourcemap: true,
+      name: "dummy",
     },
 
     plugins: [typescript(), terser()],
