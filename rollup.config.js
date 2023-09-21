@@ -4,8 +4,6 @@ import terser from "@rollup/plugin-terser";
 const FORMAT = {
   umd: "umd",
   esm: "esm",
-  iife: "iife",
-  cjs: "cjs",
 };
 
 const inputSrc = [
