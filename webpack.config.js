@@ -6,15 +6,14 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 let config = [];
 
 const moduleArray = [
-  { name: "iife", format: ".js" },
-  { name: "module", format: ".mjs" },
+  { name: "umd", format: ".cjs" },
+  { name: "module", format: ".js" },
 ];
 
 function generateConfig(module) {
   const config = {
     mode: "production",
     entry: "./src/index.ts",
-    devtool: "inline-source-map",
     module: {
       rules: [
         {
@@ -25,19 +24,18 @@ function generateConfig(module) {
       ],
     },
     experiments: {
-      outputModule: true,
+      outputModule: module.name === "module" ? true : false,
     },
     resolve: {
       extensions: [".tsx", ".ts", ".js"],
     },
     output: {
-      iife: module.name === "iife" ? true : false,
       filename: "index" + module.format,
       path: path.resolve(__dirname, "dist"),
       library: {
-        type: "module",
+        type: module.name,
+        umdNamedDefine: module.name === "umd" ? true : false,
       },
-      clean: true,
     },
   };
   return config;
