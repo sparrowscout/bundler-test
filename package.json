@@ -23,6 +23,7 @@
   "devDependencies": {
     "@types/node": "^20.5.6",
     "esbuild": "^0.19.2",
+    "esbuild-plugin-umd-wrapper": "^1.0.7",
     "typescript": "^5.2.2"
   }
 }
