@@ -16,11 +16,11 @@ const onStartPlugin = {
 const onEndPlugin = {
   name: "onEnd",
   setup(build) {
-    build.onEnd(() => {
+    build.onEnd((result) => {
       const date = new Date();
       const s = date.getSeconds();
       const ms = date.getMilliseconds();
-      console.log("end", s, ms);
+      console.log("end", s, ms, result);
     });
   },
 };
@@ -38,6 +38,7 @@ const baseConfig = {
   outdir: "dist", // 컴파일된 파일이 저장될 경로
   bundle: true, // 번들링 여부
   minify: true,
+  metafile: true,
   plugins: [onStartPlugin, onEndPlugin, umdWrapper(umdWrapperOptions)],
 };
 
