@@ -17,15 +17,13 @@ pipeline {
                 sh 'yarn install'
                 sh 'yarn run build'
                 echo "Building $BRANCH_NAME"
-                echo "Building $TAG_NAME"
             }
         }
         stage('Publish') {
             when {
-                tag "release-*"
+                tag "release*"
             }
             steps {
-                echo "Building $BRANCH_NAME"
                 echo "Building $TAG_NAME"
             }
         }
