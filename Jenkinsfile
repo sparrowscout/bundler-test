@@ -3,8 +3,8 @@ pipeline {
 
     tools {nodejs "NodeJS"}
     parameters {
-      gitParameter name: 'BRANCH_TAG',
-                     type: 'PT_BRANCH_TAG',
+      gitParameter name: 'TAG',
+                     type: 'PT_TAG',
                      defaultValue: 'master'
     }   
     stages {
@@ -20,9 +20,9 @@ pipeline {
             steps {
                 sh 'yarn install'
                 sh 'yarn run build'
-                  echo "${params.BRANCH_TAG}"
-                echo "Building $BRANCH_NAME"
-                echo "$tag_name"
+                  echo "${params.TAG}"
+                echo "Building $env.BRANCH_NAME"
+                echo "$env.TAG_NAME"
                 sh 'echo //registry.npmjs.org/:_authToken=${NPM_TOKEN}'
                 sh 'git stash'
                 sh 'npm version patch'
