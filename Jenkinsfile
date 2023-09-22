@@ -20,14 +20,12 @@ pipeline {
             }
         }
         stage('Publish') {
+             when {
+                tag "release-*"
+            }
             steps {
-
-
-
                     sh 'echo //registry.npmjs.org/:_authToken=${NPM_TOKEN}'
                     sh 'npm publish' 
-
-                
             }
         }
     }
