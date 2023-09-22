@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Build') {
             when {
-                branch "rollUp*"
+                branch "rollup*"
             }
             steps {
                 sh 'yarn install'
