@@ -21,14 +21,13 @@ pipeline {
         }
         stage('Publish') {
             steps {
-               load "$JENKINS_HOME/jobvars.env"
 
-                withEnv(["TOKEN=${NPM_TOKEN}"]) {
 
-                    sh 'echo "//registry.npmjs.org/:_authToken=${TOKEN}" >> ~/.npmrc'
+
+                    sh 'echo //registry.npmjs.org/:_authToken=${NPM_TOKEN}'
                     sh 'npm publish' 
 
-                }
+                
             }
         }
     }
