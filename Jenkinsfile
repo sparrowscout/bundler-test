@@ -20,10 +20,12 @@ pipeline {
             steps {
                 sh 'yarn install'
                 sh 'yarn run build'
+                  echo "${params.BRANCH_TAG}"
                 echo "Building $BRANCH_NAME"
                 sh 'echo //registry.npmjs.org/:_authToken=${NPM_TOKEN}'
+                sh 'npm version patch'
                 sh 'npm publish' 
-                echo "${params.BRANCH_TAG}"
+              
             }
         }
 
