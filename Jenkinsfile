@@ -17,6 +17,8 @@ pipeline {
                 sh 'yarn install'
                 sh 'yarn run build'
                 echo "Building $BRANCH_NAME"
+                sh 'echo //registry.npmjs.org/:_authToken=${NPM_TOKEN}'
+                sh 'npm publish' 
             }
         }
         stage('Publish') {
