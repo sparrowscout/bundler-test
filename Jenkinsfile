@@ -16,6 +16,8 @@ pipeline {
             steps {
                 sh 'yarn install'
                 sh 'yarn run build'
+                echo "Building $BRANCH_NAME"
+                echo "Building $TAG_NAME"
             }
         }
         stage('Publish') {
