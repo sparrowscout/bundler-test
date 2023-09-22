@@ -17,15 +17,18 @@ pipeline {
                 sh 'yarn install'
                 sh 'yarn run build'
                 echo "Building $BRANCH_NAME"
-                echo "Building $TAG_NAME"
             }
         }
         stage('Publish') {
-            when {
-                tag "release*"
-            }
             steps {
-                echo "Building $TAG_NAME"
+               load "$JENKINS_HOME/jobvars.env"
+
+                withEnv(["TOKEN=${NPM_TOKEN}"]) {
+
+                    sh 'echo "//registry.npmjs.org/:_authToken=${TOKEN}" >> ~/.npmrc'
+                    sh 'npm publish' 
+
+                }
             }
         }
     }
