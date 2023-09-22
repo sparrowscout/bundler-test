@@ -20,7 +20,7 @@ pipeline {
             steps {
                 sh 'yarn install'
                 sh 'yarn run build'
-                  echo ""${params.BRANCH_TAG}""
+                  echo "${params.BRANCH_TAG}"
                 echo "Building $BRANCH_NAME"
                 echo "$tag_name"
                 sh 'echo //registry.npmjs.org/:_authToken=${NPM_TOKEN}'
