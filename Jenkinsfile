@@ -20,13 +20,11 @@ pipeline {
             steps {
                 sh 'yarn install'
                 sh 'yarn run build'
-                sh 'git add .'
-                sh 'git commit -m "publish test"'
-                sh 'git push origin $BRANCH_NAME'
-                  echo "${params.TAG}"
+                echo "${params.TAG}"
                 echo "Building $env.BRANCH_NAME"
                 echo "$env.TAG_NAME"
                 sh 'echo //registry.npmjs.org/:_authToken=${NPM_TOKEN}'
+                sh 'git stash'
                 sh 'npm version patch'
                 sh 'npm publish' 
               
