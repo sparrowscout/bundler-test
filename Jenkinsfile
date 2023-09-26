@@ -2,15 +2,11 @@ pipeline {
     agent any
 
     tools {nodejs "NodeJS"}
-    parameters {
-      gitParameter name: 'TAG',
-                     type: 'PT_TAG',
-                     defaultValue: 'master'
-    }   
+  
     stages {
         stage('Hello') {
             steps {
-                echo 'Hello......'
+                echo 'Hello...'
             }
         }
         stage('Build') {
@@ -18,14 +14,16 @@ pipeline {
                 branch "rollup*"
             }
             steps {
-                sh 'yarn install'
+                sh 'npm install'
                 sh 'yarn run build'
-                echo "${params.TAG}"
-                echo "Building $env.BRANCH_NAME"
-                echo "$env.TAG_NAME"
-                sh 'echo //registry.npmjs.org/:_authToken=${NPM_TOKEN}'
-                sh 'git stash'
-                sh 'npm version patch'
+            }
+        }
+        stage('Publish') {
+            when {
+                branch "rollup*"
+            }
+            steps {
+                sh 'npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"'
                 sh 'npm publish' 
               
             }
