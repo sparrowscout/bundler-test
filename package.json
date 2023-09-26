@@ -8,7 +8,7 @@
     "prepack": "yarn run build",
     "build": "yarn run clean && tsc --emitDeclarationOnly && rollup -c",
     "clean": "rm -rf dist",
-    "postpack": "rm -rf src"
+    "postpublish": "rm -rf src"
   },
   "exports": {
     ".": {
