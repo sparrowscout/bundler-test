@@ -1,5 +1,5 @@
-import typescript from "@rollup/plugin-typescript";
-import terser from "@rollup/plugin-terser";
+// import terser from "@rollup/plugin-terser";
+const babel = require("@rollup/plugin-babel");
 
 const FORMAT = {
   umd: "umd",
@@ -10,6 +10,8 @@ const inputSrc = [
   ["./src/index.ts", FORMAT.umd],
   ["./src/index.ts", FORMAT.esm],
 ];
+
+const extensions = [".ts", ".js"];
 
 export default inputSrc.map(([input, format]) => {
   const extension = format === FORMAT.umd ? "cjs" : "js";
@@ -22,6 +24,14 @@ export default inputSrc.map(([input, format]) => {
       name: "dummy",
     },
 
-    plugins: [typescript(), terser()],
+    plugins: [
+      babel({
+        extensions,
+        babelHelpers: "bundled",
+        exclude: "node_modules/**",
+        presets: [["@babel/preset-typescript"]],
+        plugins: [],
+      }),
+    ],
   };
 });
