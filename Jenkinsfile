@@ -23,9 +23,7 @@ pipeline {
                 branch "rollup*"
             }
             steps {
-                sh 'npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"'
                 sh 'npm publish' 
-              
             }
         }
 
