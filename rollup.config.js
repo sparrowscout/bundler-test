@@ -1,4 +1,4 @@
-// import terser from "@rollup/plugin-terser";
+import terser from "@rollup/plugin-terser";
 const babel = require("@rollup/plugin-babel");
 
 const FORMAT = {
@@ -32,6 +32,7 @@ export default inputSrc.map(([input, format]) => {
         presets: [["@babel/preset-typescript"]],
         plugins: [],
       }),
+      terser(),
     ],
   };
 });
