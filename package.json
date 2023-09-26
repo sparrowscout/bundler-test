@@ -1,7 +1,7 @@
 {
   "name": "dummy-jenkins",
   "type": "module",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
@@ -17,8 +17,7 @@
     }
   },
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.3",
