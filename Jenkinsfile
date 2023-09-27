@@ -3,6 +3,7 @@ pipeline {
 
     environment {
     GIT_MESSAGE = get_commit_msg()
+    GIT_SUBJECT = 
     }
 
     tools {nodejs "NodeJS"}
@@ -23,7 +24,9 @@ pipeline {
                     def npmVersion = get_npm_version()
                     echo "${npmVersion}"
                echo "${env.GIT_MESSAGE}"
-                    echo "${env.GIT_MESSAGE}.indexOf('Update')"
+               def isUpdate = get_commit_subject('Update')
+                    echo "${env.GIT_MESSAGE}"
+                    echo "${isUpdate}"
                    echo "${env.GIT_COMMIT}"
                echo "${GIT_COMMIT}"
                 }
@@ -37,6 +40,11 @@ pipeline {
 def get_commit_msg(){
     script{
         return sh(script:"git show -s --format=%B ${env.GIT_COMMIT}", returnStdout:true).trim()
+    }
+}
+def get_commit_subject(step){
+        script{
+        return sh(script:"git show -s --format=%B ${env.GIT_COMMIT}", returnStdout:true).trim().indexOf(step)
     }
 }
 
