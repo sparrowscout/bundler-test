@@ -20,9 +20,10 @@ pipeline {
              
       
                 script {
-               echo `${env.GIT_MESSAGE}`
-                   echo `${env.GIT_COMMIT}`
-               echo `${GIT_COMMIT}`
+               echo "${env.GIT_MESSAGE}"
+                   echo "${env.GIT_COMMIT}"
+               echo "${GIT_COMMIT}"
+                echo $GIT_COMMIT
                 }
             }
         }
