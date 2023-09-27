@@ -38,6 +38,7 @@ pipeline {
             //     sh "npm version minor"
             //    }
                sh "git tag"
+               sh "git add ."
                sh "git commit -m "test""
                sh "git push origin ${BRANCH_NAME}"
                sh "git push origin --tags"
