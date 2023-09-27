@@ -12,7 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    def commitMsg = commit.substring( commit.indexOf(' ') ).trim()
+                    def commitMsg = commit
                     echo commitMsg
                 }
             }
