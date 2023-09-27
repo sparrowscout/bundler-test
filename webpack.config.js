@@ -17,16 +17,16 @@ function generateConfig(module) {
     module: {
       rules: [
         {
-          test: /\.tsx?$/,
+          test: /\.(?:js|mjs|ts)$/,
+          exclude: /node_modules/,
           use: [
             {
-              loader: "ts-loader",
+              loader: "babel-loader",
               options: {
-                transpileOnly: true,
+                plugins: ["@babel/plugin-transform-typescript"],
               },
             },
           ],
-          exclude: /node_modules/,
         },
       ],
     },
