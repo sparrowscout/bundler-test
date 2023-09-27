@@ -37,7 +37,8 @@ pipeline {
                } else {
                 sh "npm version minor"
                }
-               
+               sh "git tag"
+               sh "git tag -d "v0.1.0""
                sh "git commit -m "test""
                sh "git push origin ${BRANCH_NAME}"
                sh "git push origin --tags"
