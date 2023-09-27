@@ -39,7 +39,7 @@ pipeline {
             //    }
                sh "git tag"
                sh "git add ."
-               sh "git commit -m "test""
+               sh "git commit -am "test""
                sh "git push origin ${BRANCH_NAME}"
                sh "git push origin --tags"
                sh "npm publish"
