@@ -3,7 +3,6 @@ pipeline {
 
     environment {
     GIT_MESSAGE = get_commit_msg()
-    NPM_VERSION = get_npm_version()
     }
 
     tools {nodejs "NodeJS"}
@@ -21,6 +20,8 @@ pipeline {
              
       
                 script {
+                    def npmVersion = get_npm_version()
+                    echo 'npmVersion'
                echo "${env.GIT_MESSAGE}"
                    echo "${env.GIT_COMMIT}"
                echo "${GIT_COMMIT}"
