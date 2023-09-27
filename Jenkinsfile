@@ -14,15 +14,16 @@ pipeline {
             }
         }
         stage('Build') {
-            steps {   echo '$GIT_COMMIT'
+            steps {   
                       sh "git log -1"
-                echo '$env.GIT_MESSAGE'
+              
              
       
-                // script {
-                //     def commitMsg = commit
-                //     echo 'commitMsg'
-                // }
+                script {
+               echo `${env.GIT_MESSAGE}`
+                   echo `${env.GIT_COMMIT}`
+               echo `${GIT_COMMIT}`
+                }
             }
         }
 
