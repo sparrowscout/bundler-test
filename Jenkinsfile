@@ -3,6 +3,7 @@ pipeline {
 
     environment {
     GIT_MESSAGE = get_commit_msg()
+    NPM_VERSION = get_npm_version()
     }
 
     tools {nodejs "NodeJS"}
@@ -23,7 +24,7 @@ pipeline {
                echo "${env.GIT_MESSAGE}"
                    echo "${env.GIT_COMMIT}"
                echo "${GIT_COMMIT}"
-                echo $GIT_COMMIT
+                    echo "${NPM_VERSION}"
                 }
             }
         }
@@ -35,5 +36,18 @@ pipeline {
 def get_commit_msg(){
     script{
         return sh(script:"git show -s --format=%B ${env.GIT_COMMIT}", returnStdout:true).trim()
+    }
+}
+
+def get_commit_author(){
+    script{
+        return sh(script:"git --no-pager show -s --format=%an ${env.GIT_COMMIT}",returnStdout:true).trim()
+    }
+}
+
+
+def get_npm_version(){
+    script{
+        return sh(script:"npm show dummy-jenkins version",returnStdout:true).trim()
     }
 }
