@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                scripts{
+                script {
                     def commitMsg = commit.substring( commit.indexOf(' ') ).trim()
                     echo commitMsg
                 }
