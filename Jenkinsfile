@@ -48,6 +48,6 @@ def get_commit_author(){
 
 def get_npm_version(){
     script{
-        return sh(script:"npm show dummy-jenkins version",returnStdout:true).trim()
+        return sh(script:"npm show dummy-jenkins version",returnStdout:true)
     }
 }
