@@ -10,22 +10,14 @@ pipeline {
             }
         }
         stage('Build') {
-            when {
-                branch "rollup*"
-            }
             steps {
-                sh 'npm install'
-                sh 'yarn run build'
+                scripts{
+                    def commitMsg = commit.substring( commit.indexOf(' ') ).trim()
+                    echo commitMsg
+                }
             }
         }
-        stage('Publish') {
-            when {
-                branch "rollup*"
-            }
-            steps {
-                sh 'npm publish' 
-            }
-        }
+
 
     }
 }
