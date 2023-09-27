@@ -31,11 +31,13 @@ pipeline {
                def isMajor = isFeature == 0
                echo "${isUpdate}"
                echo "${isFeature}"
+                echo "${isMajor}"
                if(isMajor){
                 sh "npm version major"
                } else {
                 sh "npm version minor"
                }
+               sh "git commit -m "test""
                sh "git push origin ${BRANCH_NAME}"
                sh "git push origin --tags"
                sh "npm publish"
