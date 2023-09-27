@@ -1,11 +1,11 @@
 pipeline {
     agent any
 
-    tools {nodejs "NodeJS"}
+    environment {
+    GIT_MESSAGE = get_commit_msg()
+    }
 
-    // environment {
-    //     GIT_MESSAGE = sh '(returnStdout: true, script: 'git log -1 --format=%B ${GIT_COMMIT}').trim()'
-    // }
+    tools {nodejs "NodeJS"}
   
     stages {
         stage('Hello') {
@@ -14,10 +14,11 @@ pipeline {
             }
         }
         stage('Build') {
-            steps {
-                // echo '${env.GIT_MESSAGE}'
-                // echo '${env.GIT_COMMIT}'
-                sh "git log -1"
+            steps {   echo '${env.GIT_COMMIT}'
+                      sh "git log -1"
+                echo '${env.GIT_MESSAGE}'
+             
+      
                 // script {
                 //     def commitMsg = commit
                 //     echo 'commitMsg'
@@ -26,5 +27,11 @@ pipeline {
         }
 
 
+    }
+}
+
+def get_commit_msg(){
+    script{
+        return sh(script:"git show -s --format=%B ${env.GIT_COMMIT}", returnStdout:true).trim()
     }
 }
