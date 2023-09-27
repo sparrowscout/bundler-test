@@ -14,9 +14,9 @@ pipeline {
             }
         }
         stage('Build') {
-            steps {   echo '${env.GIT_COMMIT}'
+            steps {   echo '$GIT_COMMIT'
                       sh "git log -1"
-                echo '${env.GIT_MESSAGE}'
+                echo '$env.GIT_MESSAGE'
              
       
                 // script {
