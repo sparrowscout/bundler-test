@@ -3,7 +3,6 @@ pipeline {
 
     environment {
     GIT_MESSAGE = get_commit_msg()
-    GIT_SUBJECT = get_commit_subject()
     }
 
     tools {nodejs "NodeJS"}
