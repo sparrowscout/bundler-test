@@ -23,6 +23,7 @@ pipeline {
                     def npmVersion = get_npm_version()
                     echo "${npmVersion}"
                echo "${env.GIT_MESSAGE}"
+                    echo "${env.GIT_MESSAGE}.indexOf('Update')"
                    echo "${env.GIT_COMMIT}"
                echo "${GIT_COMMIT}"
                 }
@@ -48,6 +49,6 @@ def get_commit_author(){
 
 def get_npm_version(){
     script{
-        return sh(script:"npm show dummy-jenkins version",returnStdout:true)
+        return sh(script:"npm show dummy-jenkins version",returnStdout:true).trim()
     }
 }
