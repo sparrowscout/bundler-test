@@ -14,8 +14,6 @@ pipeline {
             }
         }
         stage('Build') {
-               echo '${env.GIT_MESSAGE}'
-                echo '${env.GIT_COMMIT}'
             steps {
                 echo '${env.GIT_MESSAGE}'
                 echo '${env.GIT_COMMIT}'
