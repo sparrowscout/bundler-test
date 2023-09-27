@@ -27,11 +27,10 @@ pipeline {
                     echo "${isUpdate}"
                    echo "${env.GIT_COMMIT}"
                echo "${GIT_COMMIT}"
-               def isUpdate = get_commit_subject("Update")
-               def isFeature = get_commit_subject("Feature")
-               echo "${isUpdate}"
-               echo "${isFeature}"
-               if(${isFeature}){
+
+               echo "get_commit_subject("Update")"
+               
+               if(get_commit_subject("Feature")){
                 sh "npm version major"
                } else {
                 sh "npm version major"
