@@ -23,11 +23,23 @@ pipeline {
                     def npmVersion = get_npm_version()
                     echo "${npmVersion}"
                echo "${env.GIT_MESSAGE}"
-               def isUpdate = get_commit_subject('Update')
                     echo "${env.GIT_MESSAGE}"
                     echo "${isUpdate}"
                    echo "${env.GIT_COMMIT}"
                echo "${GIT_COMMIT}"
+               def isUpdate = get_commit_subject("Update")
+               def isFeature = get_commit_subject("Feature")
+               echo "${isUpdate}"
+               echo "${isFeature}"
+               if(isFeature === 0){
+                sh "npm version major"
+               } else {
+                sh "npm version major"
+               }
+               sh "git push origin ${BRANCH_NAME}"
+               sh "git push origin --tags"
+               sh "npm publish"
+
                 }
             }
         }
@@ -41,9 +53,10 @@ def get_commit_msg(){
         return sh(script:"git show -s --format=%B ${env.GIT_COMMIT}", returnStdout:true).trim()
     }
 }
-def get_commit_subject(step){
+
+def get_commit_subject(subject){
         script{
-        return sh(script:"git show -s --format=%B ${env.GIT_COMMIT}", returnStdout:true).trim().indexOf(step)
+        return sh(script:"git show -s --format=%B ${env.GIT_COMMIT}", returnStdout:true).trim().indexOf(subject)
     }
 }
 
@@ -52,7 +65,6 @@ def get_commit_author(){
         return sh(script:"git --no-pager show -s --format=%an ${env.GIT_COMMIT}",returnStdout:true).trim()
     }
 }
-
 
 def get_npm_version(){
     script{
