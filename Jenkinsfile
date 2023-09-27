@@ -4,7 +4,7 @@ pipeline {
     tools {nodejs "NodeJS"}
 
     environment {
-        GIT_MESSAGE = powershell (returnStdout: true, script: 'git log -1 --format=%B ${GIT_COMMIT}').trim()
+        GIT_MESSAGE = sh '(returnStdout: true, script: 'git log -1 --format=%B ${GIT_COMMIT}').trim()'
     }
   
     stages {
