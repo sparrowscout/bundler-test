@@ -27,7 +27,7 @@ pipeline {
                    echo "${env.GIT_COMMIT}"
                echo "${GIT_COMMIT}"
                def isUpdate = get_commit_subject("Update")
-               def isFeature = (get_commit_subject("Feature") === 0)
+               def isFeature = get_commit_subject("Feature") === 0
                echo "${isUpdate}"
                echo "${isFeature}"
                if(isFeature){
