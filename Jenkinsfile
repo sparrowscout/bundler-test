@@ -21,8 +21,10 @@ pipeline {
       
                 script {
                      sh "git pull"
-                       sh "git pull origin ${BRANCH_NAME}"
-                       sh "git checkout origin/${BRANCH_NAME}"
+                    
+                   sh "git add ."
+                     sh "git commit -m 'Triggered Build: ${env.BUILD_NUMBER}'"
+               sh "git push --set-upstream origin ${BRANCH_NAME}"
                     def npmVersion = get_npm_version()
                     echo "${npmVersion}"
                echo "${env.GIT_MESSAGE}"
@@ -43,9 +45,7 @@ pipeline {
      
                sh "git tag"
                sh "git config --list"
-                    sh "git add ."
-                     sh "git commit -m 'Triggered Build: ${env.BUILD_NUMBER}'"
-               sh "git push --set-upstream origin ${BRANCH_NAME}"
+                   
                sh "git push origin --tags"
                sh "npm publish"
 
