@@ -37,7 +37,7 @@ pipeline {
             //    } else {
             //     sh "npm version minor"
             //    }
-        sh "git checkout ${BRANCH_NAME}"
+        sh "git checkout origin/${BRANCH_NAME}"
                sh "git tag"
                
                sh "git add ."
