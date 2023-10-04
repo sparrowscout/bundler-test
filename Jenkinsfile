@@ -21,6 +21,7 @@ pipeline {
       
                 script {
                        sh "git pull origin ${BRANCH_NAME}"
+                       sh "git checkout ${BRANCH_NAME}"
                     def npmVersion = get_npm_version()
                     echo "${npmVersion}"
                echo "${env.GIT_MESSAGE}"
