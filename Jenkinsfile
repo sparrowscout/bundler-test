@@ -20,6 +20,7 @@ pipeline {
              
       
                 script {
+                       sh "git pull origin ${BRANCH_NAME}"
                     def npmVersion = get_npm_version()
                     echo "${npmVersion}"
                echo "${env.GIT_MESSAGE}"
@@ -37,10 +38,8 @@ pipeline {
             //    } else {
             //     sh "npm version minor"
             //    }
-        sh "git checkout origin/${BRANCH_NAME}"
+     
                sh "git tag"
-               
-               sh "git add ."
                sh "git config --list"
                     sh "git add ."
                     //  sh "git commit -m 'Triggered Build: ${env.BUILD_NUMBER}'"
