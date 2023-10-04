@@ -23,7 +23,8 @@ pipeline {
                      sh "git pull"
                     
                    sh "git add ."
-                    
+                     sh "git pull origin ${BRANCH_NAME}"
+                        sh "git add ."
                sh "git push --set-upstream origin ${BRANCH_NAME}"
                     def npmVersion = get_npm_version()
                     echo "${npmVersion}"
