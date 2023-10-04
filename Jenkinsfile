@@ -23,7 +23,7 @@ pipeline {
                      sh "git pull"
                     
                    sh "git add ."
-                     sh "git commit -m 'Triggered Build: ${env.BUILD_NUMBER}'"
+                    
                sh "git push --set-upstream origin ${BRANCH_NAME}"
                     def npmVersion = get_npm_version()
                     echo "${npmVersion}"
