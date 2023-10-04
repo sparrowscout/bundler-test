@@ -23,6 +23,7 @@ pipeline {
                      sh "git pull"
                     
                    sh "git add ."
+                             sh "git merge origin ${BRANCH_NAME}"
                        sh "git commit -m 'Triggered Build: ${env.BUILD_NUMBER}'"
                      sh "git pull origin ${BRANCH_NAME}"
                         sh "git add ."
