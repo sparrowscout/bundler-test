@@ -43,8 +43,8 @@ pipeline {
      
                sh "git tag"
                sh "git config --list"
-                    // sh "git add ."
-                    //  sh "git commit -m 'Triggered Build: ${env.BUILD_NUMBER}'"
+                    sh "git add ."
+                     sh "git commit -m 'Triggered Build: ${env.BUILD_NUMBER}'"
                sh "git push --set-upstream origin ${BRANCH_NAME}"
                sh "git push origin --tags"
                sh "npm publish"
