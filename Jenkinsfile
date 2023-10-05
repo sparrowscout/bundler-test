@@ -20,14 +20,11 @@ pipeline {
              
       
                 script {
-                     sh "git pull"
-                     sh "git fetch origin"
-
+              
                 //         sh "git merge origin ${BRANCH_NAME}"
                 //    sh "git add ."
                 //        sh "git commit -m 'Triggered Build: ${env.BUILD_NUMBER}'"
-                sh "git status"
-               sh "git push --set-upstream origin ${BRANCH_NAME}"
+            
                     def npmVersion = get_npm_version()
                     echo "${npmVersion}"
                echo "${env.GIT_MESSAGE}"
@@ -40,12 +37,18 @@ pipeline {
                echo "${isUpdate}"
                echo "${isFeature}"
                 echo "${isMajor}"
-            //    if(isMajor){
-            //     sh "npm version major"
-            //    } else {
-            //     sh "npm version minor"
-            //    }
+               if(isMajor){
+                sh "npm version major"
+               } else {
+                sh "npm version minor"
+               }
            echo "${npmVersion}"
+                  sh "git pull"
+                        sh "git pull origin ${BRANCH_NAME}"
+                     sh "git fetch origin ${BRANCH_NAME}"
+
+               sh "git status"
+               sh "git push --set-upstream origin ${BRANCH_NAME}"
                sh "git tag"
                sh "git config --list"
                    
