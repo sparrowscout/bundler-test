@@ -48,7 +48,7 @@ pipeline {
                      sh "git fetch origin ${BRANCH_NAME}"
 
                sh "git status"
-               sh "git push --set-upstream origin ${BRANCH_NAME}"
+               sh "git push --set-upstream origin ${BRANCH_NAME} --force"
                sh "git tag"
                sh "git config --list"
                    
