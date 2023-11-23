@@ -34,6 +34,8 @@ pipeline {
                def isUpdate = get_commit_subject("Update")
                def isFeature = get_commit_subject("Feature")
                def isMajor = isFeature == 0
+               def author = get_commit_author()
+               echo "${author}"
                echo "${isUpdate}"
                echo "${isFeature}"
                 echo "${isMajor}"
